@@ -1,7 +1,5 @@
 # Winefox YSM Models
 A collection of custom YSM models for Minecraft, including the Engineer Winefox model.
-## Download
-Latest release: v1.1
 
 # 工程师酒狐
 
