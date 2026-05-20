@@ -1,5 +1,23 @@
 # Winefox YSM Models
-A collection of custom YSM models for Minecraft, including the Engineer Winefox model.
+
+A collection of custom **Yes Steve Model / YSM** character models for Minecraft.
+
+## Engineer Winefox
+
+**Engineer Winefox** is a Minecraft YSM model inspired by **Create mod machinery**, red-robed engineers, servo arms, and a light **Adeptus Mechanicus / Tech-priest / Omnissiah** aesthetic.
+
+She is a small fox-eared engineer obsessed with brass gears, kinetic contraptions, cake, and the mysterious “machine spirit” inside every device.
+
+Originally, she was only responsible for testing workshop machines.
+But after mixing Create-style kinetic components, andesite casings, brass gears, and a strange machine-spirit ritual, she became the Engineer Winefox.
+
+Now she travels with a mechanical backpack, servo arm, wrench, goggles, and enough cake to survive any mining expedition.
+
+> “I think, therefore the machine spirit listens.”
+
+## Tags
+
+`Minecraft` `YSM` `Yes Steve Model` `Winefox` `Engineer Winefox` `Create mod inspired` `kinetic machinery` `brass gears` `andesite casing` `servo arm` `Tech-priest inspired` `Adeptus Mechanicus inspired` `Omnissiah inspired` `Warhammer 40k inspired` `fox girl engineer`
 
 # 工程师酒狐
 
