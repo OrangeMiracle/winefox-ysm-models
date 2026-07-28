@@ -1,0 +1,202 @@
+{
+	"spec": 2,
+	"metadata": {
+		"name": "工程师酒狐",
+		"tips": "工程师酒狐·黄铜工坊修会\n\n工程师酒狐是一位沉迷齿轮、黄铜与蛋糕的狐耳工程师。她原本只是工坊里负责调试机械的小小酒狐，直到某次实验中，她把机械动力组件、安山机壳、黄铜齿轮和一件“不知从哪里捡来的红色圣物”接在了一起。\n\n自那以后，她开始坚信每台机器里都住着需要被安抚的“机魂”。于是，她披上深红短袍，戴上工程师护目镜，背起动力背包与机械臂，随身携带扳手、熏香炉和一小块备用蛋糕，在工坊与矿洞之间认真执行自己的“机魂净化仪式”。\n\n没人知道那件红色圣物到底来自哪里。\n酒狐本人只表示：\n“我寻思这样接，机器就会更听话。”",
+		"license": {
+			"type": "CC BY-NC-SA 4.0"
+		},
+		"authors": [
+			{
+				"name": "完美冻结",
+				"role": "模型原作",
+				"avatar": "avatar/wmdj.jpg",
+				"contact": {
+					"Afdian": "https://afdian.com/a/6TGESILA",
+					"Bilibili": "https://space.bilibili.com/17798027"
+				},
+				"comment": "OwO"
+			},
+			{
+				"name": "三叶虫trita",
+				"role": "模型修改",
+				"comment": "b站同名模型作者",
+				"avatar": "avatar/touxiang.png",
+				"contact": {
+					"Bilibili": "https://space.bilibili.com/3546853285038916"
+				}
+			},
+			{
+				"name": "OrangeMiracle",
+				"avatar": "avatar/orangemiracle.jpg",
+				"role": "模型设计",
+				"contact": {
+					"Bilibili": "https://space.bilibili.com/10383626",
+					"Modrinth": "https://modrinth.com/user/orangemarvel0401",
+					"Github": "https://github.com/OrangeMiracle"
+				},
+				"comment": "如果奇迹有颜色 那一定是橙色"
+			}
+		]
+	},
+	"properties": {
+		"extra_animation": {
+			"面具穿戴": "#面具",
+			"斗篷穿戴": "#斗篷",
+			"螺旋桨大小调整": "#螺旋桨",
+			"熏香净化仪式": "熏香净化仪式",
+			"表情包": "#表情包",
+			"耳朵斗篷样式调整": "#耳朵斗篷"
+		},
+		"preview_animation": "gui",
+		"disable_preview_rotation": true,
+		"free": true,
+		"height_scale": 0.7,
+		"width_scale": 0.7,
+		"render_layers_first": false,
+		"all_cutout": false,
+		"gui_no_lighting": false,
+		"default_texture": "skin",
+		"extra_animation_buttons": [
+			{
+				"id": "面具",
+				"name": "面具",
+				"config_forms": [
+					{
+						"type": "checkbox",
+						"title": "面具",
+						"description": "面具",
+						"value": "v.roaming.mj"
+					}
+				]
+			},
+			{
+				"id": "斗篷",
+				"name": "斗篷",
+				"config_forms": [
+					{
+						"type": "checkbox",
+						"title": "斗篷",
+						"description": "斗篷",
+						"value": "v.roaming.dp"
+					}
+				]
+			},
+			{
+				"id": "螺旋桨",
+				"name": "螺旋桨",
+				"config_forms": [
+					{
+						"type": "range",
+						"title": "螺旋桨大小",
+						"description": "螺旋桨大小",
+						"value": "v.roaming.lxj",
+						"step": 1,
+						"min": 0,
+						"max": 2
+					}
+				]
+			},
+			{
+				"id": "表情包",
+				"name": "表情包",
+				"config_forms": [
+					{
+						"type": "checkbox",
+						"title": "表情包",
+						"description": "表情包挂件",
+						"value": "v.roaming.bqb"
+					}
+				]
+			},
+			{
+				"id": "耳朵斗篷",
+				"name": "耳朵斗篷样式",
+				"config_forms": [
+					{
+						"type": "range",
+						"title": "耳朵斗篷样式",
+						"description": "耳朵斗篷样式",
+						"value": "v.roaming.erduo",
+						"step": 1,
+						"min": 1,
+						"max": 3
+					}
+				]
+			}
+		]
+	},
+	"files": {
+		"player": {
+			"model": {
+				"main": "models/main.json",
+				"arm": "models/arm.json"
+			},
+			"animation": {
+				"main": "animations/main.animation.json",
+				"extra": "animations/extra.animation.json",
+				"tac": "animations/tac.animation.json",
+				"carryon": "animations/carryon.animation.json",
+				"tlm": "animations/tlm.animation.json",
+				"fp_arm": "animations/fp.arm.animation.json"
+			},
+			"animation_controllers": ["controller/wine_fox.animation_controllers.json"],
+			"texture": [
+				{
+					"uv": "textures/skin.png"
+				}
+			]
+		},
+		"projectiles": [
+			{
+				"match": ["minecraft:arrow"],
+				"model": "models/arrow.json",
+				"animation": "animations/arrow.animation.json",
+				"texture": {
+					"uv": "textures/arrow.png"
+				}
+			},
+			{
+				"match": ["minecraft:trident"],
+				"model": "models/trident.json",
+				"texture": {
+					"uv": "textures/trident.png"
+				}
+			}
+		],
+		"vehicles": [
+			{
+				"match": ["minecraft:horse"],
+				"model": "models/foxcar.json",
+				"texture": {
+					"uv": "textures/foxcar.png",
+					"specular": "textures/foxcar_s.png"
+				},
+				"animation": "animations/vehicle/horse.animation.json"
+			},
+			{
+				"match": ["minecraft:mule"],
+				"model": "models/foxcar.json",
+				"texture": {
+					"uv": "textures/foxcar.png",
+					"specular": "textures/foxcar_s.png"
+				},
+				"animation": "animations/vehicle/mule.animation.json"
+			},
+			{
+				"match": ["minecraft:minecart"],
+				"model": "models/minecart.json",
+				"texture": {
+					"uv": "textures/minecart.png"
+				}
+			},
+			{
+				"match": ["minecraft:boat"],
+				"model": "models/boat.json",
+				"texture": {
+					"uv": "textures/boat.png"
+				}
+			}
+		]
+	}
+}
