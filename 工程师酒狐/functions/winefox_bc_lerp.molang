@@ -1,4 +1,6 @@
-// Linear interpolation preserves baked authoring; smoothstep is the legacy slash easing.
+// Linear for baked thrust; four-point Catmull-Rom for authored slash curves.
 t.u = math.clamp((args[0] - args[1]) / (args[2] - args[1]), 0, 1);
-t.u = args[5] ? t.u : t.u * t.u * (3 - 2 * t.u);
-return args[3] + (args[4] - args[3]) * t.u;
+args[5] ? { return args[3] + (args[4] - args[3]) * t.u; };
+t.m0 = (args[4] - args[6]) * 0.5;
+t.m1 = (args[7] - args[3]) * 0.5;
+return (2 * args[3] - 2 * args[4] + t.m0 + t.m1) * t.u * t.u * t.u + (-3 * args[3] + 3 * args[4] - 2 * t.m0 - t.m1) * t.u * t.u + t.m0 * t.u + args[3];
