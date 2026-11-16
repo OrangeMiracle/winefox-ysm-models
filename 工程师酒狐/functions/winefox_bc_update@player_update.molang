@@ -1,0 +1,89 @@
+// Better Combat owns the attack choice. Never count a three-hit combo here.
+// Explicit blocks are required here: YSM 2.6.5 mis-evaluates the shorthand
+// conditional assignment. tools/test_ysm.py exercises the actual parser.
+t.action = 0;
+t.eligible = ctrl.hold('mainhand', ':sword') && ysm.swinging_arm == 0;
+t.eligible ? {
+    (ctrl.bcombat_attack_animation == 'one_handed_slash_horizontal_right' || ctrl.bcombat_attack_animation == '"one_handed_slash_horizontal_right"') ? { t.action = 1; };
+    (ctrl.bcombat_attack_animation == 'one_handed_slash_horizontal_left' || ctrl.bcombat_attack_animation == '"one_handed_slash_horizontal_left"') ? { t.action = 2; };
+    (ctrl.bcombat_attack_animation == 'one_handed_stab' || ctrl.bcombat_attack_animation == '"one_handed_stab"') ? { t.action = 3; };
+};
+// Attack selection belongs to Better Combat; presentation has its own recovery.
+t.now = query.life_time;
+t.restart = t.action > 0 && (t.action != v.winefox_bc_input || (ysm.swinging && ysm.swing_time < v.winefox_bc_last_swing));
+t.restart ? {
+    v.winefox_bc_combo = v.winefox_bc_action > 0;
+    // BEGIN GENERATED POSE SNAPSHOT
+    v.winefox_bc_combo ? {
+        v.winefox_bc_from_arm_position_0 = v.winefox_bc_pose_arm_position_0;
+        v.winefox_bc_from_arm_position_1 = v.winefox_bc_pose_arm_position_1;
+        v.winefox_bc_from_arm_position_2 = v.winefox_bc_pose_arm_position_2;
+        v.winefox_bc_from_arm_rotation_0 = v.winefox_bc_pose_arm_rotation_0;
+        v.winefox_bc_from_arm_rotation_1 = v.winefox_bc_pose_arm_rotation_1;
+        v.winefox_bc_from_arm_rotation_2 = v.winefox_bc_pose_arm_rotation_2;
+        v.winefox_bc_from_head_rotation_0 = v.winefox_bc_pose_head_rotation_0;
+        v.winefox_bc_from_head_rotation_1 = v.winefox_bc_pose_head_rotation_1;
+        v.winefox_bc_from_head_rotation_2 = v.winefox_bc_pose_head_rotation_2;
+        v.winefox_bc_from_leftarm_rotation_0 = v.winefox_bc_pose_leftarm_rotation_0;
+        v.winefox_bc_from_leftarm_rotation_1 = v.winefox_bc_pose_leftarm_rotation_1;
+        v.winefox_bc_from_leftarm_rotation_2 = v.winefox_bc_pose_leftarm_rotation_2;
+        v.winefox_bc_from_leftforearm_rotation_0 = v.winefox_bc_pose_leftforearm_rotation_0;
+        v.winefox_bc_from_leftforearm_rotation_1 = v.winefox_bc_pose_leftforearm_rotation_1;
+        v.winefox_bc_from_leftforearm_rotation_2 = v.winefox_bc_pose_leftforearm_rotation_2;
+        v.winefox_bc_from_rightarm_rotation_0 = v.winefox_bc_pose_rightarm_rotation_0;
+        v.winefox_bc_from_rightarm_rotation_1 = v.winefox_bc_pose_rightarm_rotation_1;
+        v.winefox_bc_from_rightarm_rotation_2 = v.winefox_bc_pose_rightarm_rotation_2;
+        v.winefox_bc_from_rightforearm_rotation_0 = v.winefox_bc_pose_rightforearm_rotation_0;
+        v.winefox_bc_from_rightforearm_rotation_1 = v.winefox_bc_pose_rightforearm_rotation_1;
+        v.winefox_bc_from_rightforearm_rotation_2 = v.winefox_bc_pose_rightforearm_rotation_2;
+        v.winefox_bc_from_righthand_rotation_0 = v.winefox_bc_pose_righthand_rotation_0;
+        v.winefox_bc_from_righthand_rotation_1 = v.winefox_bc_pose_righthand_rotation_1;
+        v.winefox_bc_from_righthand_rotation_2 = v.winefox_bc_pose_righthand_rotation_2;
+        v.winefox_bc_from_upbody_position_0 = v.winefox_bc_pose_upbody_position_0;
+        v.winefox_bc_from_upbody_position_1 = v.winefox_bc_pose_upbody_position_1;
+        v.winefox_bc_from_upbody_position_2 = v.winefox_bc_pose_upbody_position_2;
+        v.winefox_bc_from_upbody_rotation_0 = v.winefox_bc_pose_upbody_rotation_0;
+        v.winefox_bc_from_upbody_rotation_1 = v.winefox_bc_pose_upbody_rotation_1;
+        v.winefox_bc_from_upbody_rotation_2 = v.winefox_bc_pose_upbody_rotation_2;
+        v.winefox_bc_from_upperbody_position_0 = v.winefox_bc_pose_upperbody_position_0;
+        v.winefox_bc_from_upperbody_position_1 = v.winefox_bc_pose_upperbody_position_1;
+        v.winefox_bc_from_upperbody_position_2 = v.winefox_bc_pose_upperbody_position_2;
+        v.winefox_bc_from_upperbody_rotation_0 = v.winefox_bc_pose_upperbody_rotation_0;
+        v.winefox_bc_from_upperbody_rotation_1 = v.winefox_bc_pose_upperbody_rotation_1;
+        v.winefox_bc_from_upperbody_rotation_2 = v.winefox_bc_pose_upperbody_rotation_2;
+    };
+    // END GENERATED POSE SNAPSHOT
+    v.winefox_bc_start = t.now;
+    v.winefox_bc_speed = math.clamp(ysm.attack_speed, 0.1, 20);
+    v.winefox_bc_action = t.action;
+};
+// A missing input may be a gap between combo attacks. Never reset to idle here.
+t.empty = ctrl.bcombat_attack_animation == '' || ctrl.bcombat_attack_animation == '""';
+(t.action == 0 && v.winefox_bc_input > 0) ? {
+    v.winefox_bc_recover_at = math.max(t.now + 0.12, v.winefox_bc_start + 0.5 / v.winefox_bc_speed + (v.winefox_bc_action == 3 ? 0.1 : 0.5833));
+};
+t.elapsed = math.max(0, t.now - v.winefox_bc_start);
+t.hit_age = t.elapsed - 0.5 / math.max(0.1, v.winefox_bc_speed);
+t.recovery = (t.action == 0 && t.eligible && t.empty) ? math.max(0, t.now - v.winefox_bc_recover_at) : 0;
+// Combo windup skips the extra idle key and blends from the last displayed pose.
+t.from = v.winefox_bc_combo ? 0.2083 : 0;
+v.winefox_bc_blend = v.winefox_bc_combo ? math.clamp(t.elapsed / math.min(0.12, 0.2 / v.winefox_bc_speed), 0, 1) : 1;
+v.winefox_bc_blend = v.winefox_bc_blend * v.winefox_bc_blend * (3 - 2 * v.winefox_bc_blend);
+(t.hit_age < 0) ? {
+    v.winefox_bc_phase = t.from + (0.5 - t.from) * math.clamp(t.elapsed * v.winefox_bc_speed * 2, 0, 1);
+} : {
+    (v.winefox_bc_action == 3) ? {
+        v.winefox_bc_phase = math.min(1, 0.5 + math.min(0.1, t.hit_age) + t.recovery * 0.4 / 0.55);
+    } : {
+        // Original slash: hit .1667, hold .25-.75, recover 1/1.4167/1.5.
+        t.tail = t.recovery > 0 ? 0.75 + t.recovery : math.min(0.75, 0.1667 + t.hit_age);
+        v.winefox_bc_phase = t.tail < 0.25 ? 0.5 + (t.tail - 0.1667) * 0.0833 / 0.0833 : (t.tail < 0.75 ? 0.5833 + (t.tail - 0.25) * 0.0834 / 0.5 : (t.tail < 1 ? 0.6667 + (t.tail - 0.75) * 0.125 / 0.25 : (t.tail < 1.4167 ? 0.7917 + (t.tail - 1) * 0.125 / 0.4167 : math.min(1, 0.9167 + (t.tail - 1.4167) * 0.0833 / 0.0833))));
+    };
+};
+// Only an empty input can finish the single-hit recovery. Unknown attacks cancel.
+t.keep = t.eligible && t.empty && v.winefox_bc_phase < 1;
+v.winefox_bc_input = t.action;
+(t.action == 0 && t.keep) ? { t.action = v.winefox_bc_action; };
+v.winefox_bc_action = t.action;
+(v.winefox_bc_action == 0) ? { v.winefox_bc_phase = 0; };
+v.winefox_bc_last_swing = ysm.swing_time;
