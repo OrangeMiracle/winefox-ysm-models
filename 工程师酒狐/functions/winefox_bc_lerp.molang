@@ -1,0 +1,4 @@
+// Linear interpolation preserves baked authoring; smoothstep is the legacy slash easing.
+t.u = math.clamp((args[0] - args[1]) / (args[2] - args[1]), 0, 1);
+t.u = args[5] ? t.u : t.u * t.u * (3 - 2 * t.u);
+return args[3] + (args[4] - args[3]) * t.u;

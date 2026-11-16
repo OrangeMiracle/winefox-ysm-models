@@ -138,9 +138,10 @@
 				"tac": "animations/tac.animation.json",
 				"carryon": "animations/carryon.animation.json",
 				"tlm": "animations/tlm.animation.json",
-				"fp_arm": "animations/fp.arm.animation.json"
+				"fp_arm": "animations/fp.arm.animation.json",
+				"arm": "animations/better_combat.animation.json"
 			},
-			"animation_controllers": ["controller/wine_fox.animation_controllers.json"],
+			"animation_controllers": ["controller/wine_fox.animation_controllers.json", "controller/better_combat.animation_controllers.json"],
 			"texture": [
 				{
 					"uv": "textures/skin.png"

@@ -1,0 +1,19 @@
+// Better Combat owns the attack choice. Never count a three-hit combo here.
+// Explicit blocks are required here: YSM 2.6.5 mis-evaluates the shorthand
+// conditional assignment. tools/test_ysm.py exercises the actual parser.
+t.action = 0;
+(ctrl.hold('mainhand', ':sword') && ysm.swinging_arm == 0) ? {
+    (ctrl.bcombat_attack_animation == 'one_handed_slash_horizontal_right' || ctrl.bcombat_attack_animation == '"one_handed_slash_horizontal_right"') ? { t.action = 1; };
+    (ctrl.bcombat_attack_animation == 'one_handed_slash_horizontal_left' || ctrl.bcombat_attack_animation == '"one_handed_slash_horizontal_left"') ? { t.action = 2; };
+    (ctrl.bcombat_attack_animation == 'one_handed_stab' || ctrl.bcombat_attack_animation == '"one_handed_stab"') ? { t.action = 3; };
+};
+// A changed action, idle gap, or swing-counter restart starts a fresh attack.
+t.restart = t.action != v.winefox_bc_action || (ysm.swinging && ysm.swing_time < v.winefox_bc_last_swing);
+(t.action == 0 || t.restart) ? {
+    v.winefox_bc_phase = 0;
+    v.winefox_bc_speed = math.clamp(ysm.attack_speed, 0.1, 20);
+} : {
+    v.winefox_bc_phase = math.min(1, v.winefox_bc_phase + ysm.time_delta * v.winefox_bc_speed);
+};
+v.winefox_bc_last_swing = ysm.swing_time;
+v.winefox_bc_action = t.action;
